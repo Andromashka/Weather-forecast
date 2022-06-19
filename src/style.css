@@ -13,7 +13,9 @@ h1 {
 ul {
   margin: 0;
   padding: 0;
+  margin-top: 10px;
 }
+
 li {
   list-style: none;
   margin: 0;
@@ -26,7 +28,7 @@ li {
   margin-bottom: 20px;
 }
 .weather-app-wrapper {
-  max-width: 600px;
+  max-width: 500px;
   margin: 30px auto;
 }
 .weather-app {
@@ -36,8 +38,9 @@ li {
   background: #edf7fa;
 }
 .weather-temperature {
-  height: 94px;
-  width: 94px;
+  height: 100px;
+  width: 100px;
+  margin-left: 35px;
 }
 .sun {
   margin-left: 25px;
@@ -46,7 +49,6 @@ li {
   color: #79bff8;
   font-size: 34px;
   font-weight: 400px;
-  line-height: 1;
 }
 .weather-temperature.units {
   position: relative;
