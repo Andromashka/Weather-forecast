@@ -1,12 +1,12 @@
 function formatDate(timestamp) {
   let date = new Date(timestamp);
   let hours = date.getHours();
-  if (hours<10){
-    hours=`0${hours}`;
+  if (hours < 10) {
+    hours = `0${hours}`;
   }
   let minutes = date.getMinutes();
-  if (minutes <10){
-    minutes=`0${minutes}`;
+  if (minutes < 10) {
+    minutes = `0${minutes}`;
   }
   let days = [
     "Sunday",
@@ -28,6 +28,9 @@ function displayTemperature(response) {
   let humidityElement = document.querySelector("#humidity");
   let windElement = document.querySelector("#wind");
   let dateElement = document.querySelector("#date");
+  let iconElement=document.querySelector("#icon");
+  iconElement.setAttribute("src", `https://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`);
+  iconElement.setAttribute("alt", response.data.weather[0].description);
   dateElement.innerHTML = formatDate(response.data.dt * 1000);
   windElement.innerHTML = Math.round(response.data.wind.speed);
   humidityElement.innerHTML = response.data.main.humidity;
@@ -37,7 +40,7 @@ function displayTemperature(response) {
 }
 
 let apiKey = "e703fefde0fb0347c2ba5d655daa1cbe";
-let city="Brasov";
+let city = "Brasov";
 let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
 
 axios.get(apiUrl).then(displayTemperature);
