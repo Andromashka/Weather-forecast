@@ -13,20 +13,23 @@ h1 {
 ul {
   margin: 0;
   padding: 0;
-  margin-top: 10px;
+  margin-top: 30px;
 }
 
 li {
   list-style: none;
   margin: 0;
   padding: 0;
-  
+
   color: #005792;
   font-size: 16px;
   line-height: 19px;
 }
-li:first-letter{
+li:first-letter {
   text-transform: capitalize;
+}
+.description {
+  font-size: 40px;
 }
 .overview {
   margin-bottom: 20px;
@@ -41,22 +44,29 @@ li:first-letter{
   border-radius: 12px;
   background: #fbffff;
 }
-.weather-temperature {
+.weather-temperature img {
   height: 100px;
   width: 100px;
-  margin-left: 35px;
+  margin-left: 10px;
 }
-.sun {
-  margin-left: 25px;
-}
+
 .weather-temperature strong {
   color: #79bff8;
-  font-size: 34px;
+  font-size: 54px;
   font-weight: 400px;
+  line-height: 1;
 }
-.weather-temperature.units {
+.units {
   position: relative;
   font-size: 16px;
   top: -34px;
-  line-height: 1;
+}
+
+.active {
+  color: black;
+  cursor: default;
+}
+
+.active:hover {
+  text-decoration: none;
 }
