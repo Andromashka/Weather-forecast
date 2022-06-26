@@ -21,6 +21,37 @@ function formatDate(timestamp) {
   return `${day} ${hours}:${minutes}`;
 }
 
+function displayForecast() {
+  let forecastElement = document.querySelector("#forecast");
+
+  let forecastHTML = `<div class="row">`;
+  let days=["Sun",
+            "Mon",
+            "Tue",
+            "Wed",
+            "Thu",
+            "Fri",
+           ];
+
+           days.forEach(function(day){
+      forecastHTML =
+    forecastHTML +
+    ` 
+              <div class="col-2">
+                <div class="weather-forecast-date">${day}</div>
+                <img src="src/images/sunny.png" alt="" width="42" />
+                <div class="weather-forecast-temperatures">
+                  <span class="weather-forecast-max">18° </span>
+                  <span class="weather-forecast-min">12°</span>
+                </div>
+              </div>
+           `;      
+           })
+  
+  forecastHTML = forecastHTML + `</div>`;
+  forecastElement.innerHTML = forecastHTML;
+}
+
 function displayTemperature(response) {
   let temperatureElement = document.querySelector("#temperature");
   let cityElement = document.querySelector("#city");
@@ -86,3 +117,4 @@ let celsiusLink = document.querySelector("#celsius-link");
 celsiusLink.addEventListener("click", displayCelsiusTemperature);
 
 search("Brasov");
+displayForecast();
