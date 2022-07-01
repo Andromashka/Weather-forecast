@@ -8,6 +8,7 @@ function formatDate(timestamp) {
   if (minutes < 10) {
     minutes = `0${minutes}`;
   }
+
   let days = [
     "Sunday",
     "Monday",
@@ -21,37 +22,52 @@ function formatDate(timestamp) {
   return `${day} ${hours}:${minutes}`;
 }
 
-function displayForecast() {
+function formatDay(timestamp) {
+  let date = new Date(timestamp * 1000);
+  let day = date.getDate();
+  let days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+
+  return days[day];
+}
+
+function displayForecast(response) {
+  let forecast = response.data.daily;
+
   let forecastElement = document.querySelector("#forecast");
 
   let forecastHTML = `<div class="row">`;
-  let days=["Sun",
-            "Mon",
-            "Tue",
-            "Wed",
-            "Thu",
-            "Fri",
-           ];
-
-           days.forEach(function(day){
-      forecastHTML =
-    forecastHTML +
-    ` 
+forecast.forEach(function (forecastDay, index) {
+  if(index<6){
+    forecastHTML =
+      forecastHTML +
+      ` 
               <div class="col-2">
-                <div class="weather-forecast-date">${day}</div>
-                <img src="src/images/sunny.png" alt="" width="42" />
+                <div class="weather-forecast-date">${formatDay(
+                  forecastDay.dt
+                )}</div>
+                <img src= "http://openweathermap.org/img/wn/${
+                  forecastDay.weather[0].icon
+                }@2x.png"
+                alt="" 
+                width="42" />
                 <div class="weather-forecast-temperatures">
-                  <span class="weather-forecast-max">18° </span>
-                  <span class="weather-forecast-min">12°</span>
+                  <span class="weather-forecast-max">${Math.round(forecastDay.temp.max)}° </span>
+                  <span class="weather-forecast-min">${Math.round(forecastDay.temp.min)}°</span>
                 </div>
               </div>
-           `;      
-           })
-  
+           `;
+  }
+  });
+
   forecastHTML = forecastHTML + `</div>`;
   forecastElement.innerHTML = forecastHTML;
 }
-
+function getForecast(coordinates) {
+  console.log(coordinates);
+  let apiKey = "e703fefde0fb0347c2ba5d655daa1cbe";
+  let apiUrl = `https:api.openweathermap.org/data/2.5/onecall?lat=${coordinates.lat}&lon=${coordinates.lon}&appid=${apiKey}&units=metric`;
+  axios.get(apiUrl).then(displayForecast);
+}
 function displayTemperature(response) {
   let temperatureElement = document.querySelector("#temperature");
   let cityElement = document.querySelector("#city");
@@ -74,6 +90,8 @@ function displayTemperature(response) {
   descriptionElement.innerHTML = response.data.weather[0].description;
   cityElement.innerHTML = response.data.name;
   temperatureElement.innerHTML = Math.round(celsiusTemperature);
+
+  getForecast(response.data.coord);
 }
 
 function search(city) {
@@ -117,4 +135,3 @@ let celsiusLink = document.querySelector("#celsius-link");
 celsiusLink.addEventListener("click", displayCelsiusTemperature);
 
 search("Brasov");
-displayForecast();
