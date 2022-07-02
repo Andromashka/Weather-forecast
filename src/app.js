@@ -66,7 +66,7 @@ forecast.forEach(function (forecastDay, index) {
 function getForecast(coordinates) {
   console.log(coordinates);
   let apiKey = "e703fefde0fb0347c2ba5d655daa1cbe";
-  let apiUrl = `https:api.openweathermap.org/data/2.5/onecall?lat=${coordinates.lat}&lon=${coordinates.lon}&appid=${apiKey}&units=metric`;
+  let apiUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${coordinates.lat}&lon=${coordinates.lon}&appid=${apiKey}&units=metric`;
   axios.get(apiUrl).then(displayForecast);
 }
 function displayTemperature(response) {
